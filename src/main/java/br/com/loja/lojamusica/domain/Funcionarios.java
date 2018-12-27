@@ -2,6 +2,7 @@ package br.com.loja.lojamusica.domain;
 
 import java.time.LocalDate;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,6 +18,7 @@ public class Funcionarios extends BaseDomain {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "funcionarioid")
 	private Integer id;
 
 	@NotNull
@@ -25,6 +27,7 @@ public class Funcionarios extends BaseDomain {
 	private String nome;
 
 	@NotNull
+	@Column(name = "data_nasc")
 	private LocalDate dataNasc;
 
 	@SuppressWarnings("unused")

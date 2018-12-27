@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import br.com.loja.lojamusica.domain.Cliente;
+import br.com.loja.lojamusica.DTO.ClienteDTO;
 import br.com.loja.lojamusica.domain.DominioInvalidoException;
 
 @RunWith(value = SpringRunner.class)
@@ -19,40 +19,62 @@ public class ClienteServiceTest {
 
 	@Test
 	public void deveSalvarClientes() {
-		Cliente cliente = new Cliente("Cristiano", "CristianoDoPagode@hotmail.com", "73262221007");
-		cliService.save(cliente);
+		ClienteDTO clienteDTO = new ClienteDTO();
+		clienteDTO.setEmail("CristianoDoPagode@hotmail.com");
+		clienteDTO.setNome("Cristiano");
+		clienteDTO.setCpf("73262221007");
+		
+		
+		cliService.save(clienteDTO);
 
-		Cliente clienteSalvo = cliService.findByID(cliente.getId());
+		ClienteDTO clienteSalvo = cliService.findByID(clienteDTO.getId());
 
-		Assert.assertEquals(cliente, clienteSalvo);
+		Assert.assertEquals(clienteDTO.getEmail(), clienteSalvo.getEmail());
+		Assert.assertEquals(clienteDTO.getNome(), clienteSalvo.getNome());
+		Assert.assertEquals(clienteDTO.getCpf(), clienteSalvo.getCpf());
 	}
 
 	@Test(expected = DominioInvalidoException.class)
 	public void deveExcluirClientes() {
-		Cliente cliente = new Cliente("Cristiano", "CristianoDoPagode@hotmail.com", "73262221007");
-		cliService.save(cliente);
+		ClienteDTO clienteDTO = new ClienteDTO();
+		clienteDTO.setEmail("CristianoDoPagode@hotmail.com");
+		clienteDTO.setNome("Cristiano");
+		clienteDTO.setCpf("73262221007");
+		
+		cliService.save(clienteDTO);
 //		Cliente clienteSalvo = cliService.findByID(cliente);
 //		cliService.delete(clienteSalvo);
 // Não pode colocar o findById armazenado em uma variavel "ClienteSalvo" e deletar o teste falha
-		cliService.delete(cliente);
-		cliService.findByID(cliente.getId());
+		cliService.delete(clienteDTO);
+		cliService.findByID(clienteDTO.getId());
 	}
 	@Test
 	public void deveEditarClientes() {
-		Cliente cliente = new Cliente("Cristiano", "CristianoDoPagode@hotmail.com", "73262221007");
-		cliService.save(cliente);
+		ClienteDTO clienteDTO = new ClienteDTO();
+		clienteDTO.setEmail("CristianoDoPagode@hotmail.com");
+		clienteDTO.setNome("Cristiano");
+		clienteDTO.setCpf("73262221007");
 		
-		Cliente clienteSalvo = cliService.findByID(cliente.getId());
+		// mando salvar
+		cliService.save(clienteDTO);
 		
-		Cliente clienteEditado = new Cliente(clienteSalvo.getId(), "Olavo", "OlavoDoPagode@gmail.com", "03486008013");
+		// consulto
+		ClienteDTO clienteParaEditar = cliService.findByID(clienteDTO.getId());
 		
-		cliService.Edit(clienteEditado);
+		// altero os dados
+		clienteParaEditar.setNome("Olavo");
+		clienteParaEditar.setEmail("OlavoDoPagode@gmail.com");
+		clienteParaEditar.setCpf("03486008013");
+		
+		// mando editar
+		cliService.edit(clienteParaEditar);
 
+		// consulto para validar a edição
+		ClienteDTO clienteEditado = cliService.findByID(clienteParaEditar.getId());
+		
 		Assert.assertEquals("Olavo" , clienteEditado.getNome());
 		Assert.assertEquals("OlavoDoPagode@gmail.com" , clienteEditado.getEmail());
 		Assert.assertEquals("03486008013" , clienteEditado.getCpf());
-		
-		
 	}
 
 }

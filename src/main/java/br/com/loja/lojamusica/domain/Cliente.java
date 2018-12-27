@@ -1,5 +1,6 @@
 package br.com.loja.lojamusica.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,6 +19,7 @@ public class Cliente extends BaseDomain {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "clienteid")
 	private Integer id;
 
 	@NotNull
@@ -38,7 +40,7 @@ public class Cliente extends BaseDomain {
 	// private List<Contato> contados;
 
 	@SuppressWarnings("unused")
-	public Cliente() {
+	private Cliente() {
 		// construtor for hibernate
 	}
 
@@ -48,7 +50,6 @@ public class Cliente extends BaseDomain {
 		this.email = email;
 		this.cpf = cpf;
 		validarDominio();
-
 	}
 
 	public Cliente(Integer id, String nome, String email, String cpf) {

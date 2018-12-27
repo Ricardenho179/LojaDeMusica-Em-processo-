@@ -1,5 +1,6 @@
 package br.com.loja.lojamusica.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,11 +10,12 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "InstrumentosAcusticos")
+@Table(name = "instrumentos_acusticos")
 public class InstrumentosAcusticos extends BaseDomain {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "instru_acusid")
 	private Integer id;
 
 	@NotNull
