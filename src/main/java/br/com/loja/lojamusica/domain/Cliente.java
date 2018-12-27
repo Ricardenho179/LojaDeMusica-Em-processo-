@@ -14,7 +14,7 @@ import org.hibernate.validator.constraints.br.CPF;
 
 @Entity
 @Table(name = "cliente")
-public class Cliente {
+public class Cliente extends BaseDomain {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,10 +42,12 @@ public class Cliente {
 		// construtor for hibernate
 	}
 
+	// Construtor de teste
 	public Cliente(String nome, String email, String cpf) {
 		this.nome = nome;
 		this.email = email;
 		this.cpf = cpf;
+		validarDominio();
 
 	}
 
@@ -54,6 +56,7 @@ public class Cliente {
 		this.nome = nome;
 		this.email = email;
 		this.cpf = cpf;
+		validarDominio();
 
 	}
 

@@ -1,7 +1,5 @@
 package br.com.loja.lojamusica.domain;
 
-import java.time.LocalDate;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,11 +7,10 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "funcionarios")
-public class Funcionarios extends BaseDomain {
+@Table(name = "InstrumentosAcusticos")
+public class InstrumentosAcusticos extends BaseDomain {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,29 +18,37 @@ public class Funcionarios extends BaseDomain {
 
 	@NotNull
 	@NotEmpty
-	@Size(max = 50, min = 4)
+	private String tipo;
+	@NotNull
+	@NotEmpty
 	private String nome;
+	@NotNull
+	@NotEmpty
+	private String marca;
 
 	@NotNull
-	private LocalDate dataNasc;
+	private double valor;
 
 	@SuppressWarnings("unused")
-	public Funcionarios() {
-		// construtor for hibernate
+	public InstrumentosAcusticos() {
+
 	}
 
-	public Funcionarios(Integer id, String nome, LocalDate dataNasc) {
+	public InstrumentosAcusticos(Integer id, String tipo, String nome, String marca, double valor) {
 		this.id = id;
+		this.tipo = tipo;
 		this.nome = nome;
-		this.dataNasc = dataNasc;
+		this.marca = marca;
+		this.valor = valor;
 		validarDominio();
-
 	}
 
 	// Construtor de teste
-	public Funcionarios(String nome, LocalDate dataNasc) {
+	public InstrumentosAcusticos(String tipo, String nome, String marca, double valor) {
+		this.tipo = tipo;
 		this.nome = nome;
-		this.dataNasc = dataNasc;
+		this.marca = marca;
+		this.valor = valor;
 		validarDominio();
 	}
 
@@ -51,20 +56,29 @@ public class Funcionarios extends BaseDomain {
 		return id;
 	}
 
+	public String getTipo() {
+		return tipo;
+	}
+
 	public String getNome() {
 		return nome;
 	}
 
-	public LocalDate getDataNasc() {
-		return dataNasc;
+	public String getMarca() {
+		return marca;
+	}
+
+	public Double getValor() {
+		return valor;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((dataNasc == null) ? 0 : dataNasc.hashCode());
+		result = prime * result + ((marca == null) ? 0 : marca.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		result = prime * result + ((tipo == null) ? 0 : tipo.hashCode());
 		return result;
 	}
 
@@ -76,16 +90,21 @@ public class Funcionarios extends BaseDomain {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Funcionarios other = (Funcionarios) obj;
-		if (dataNasc == null) {
-			if (other.dataNasc != null)
+		InstrumentosAcusticos other = (InstrumentosAcusticos) obj;
+		if (marca == null) {
+			if (other.marca != null)
 				return false;
-		} else if (!dataNasc.equals(other.dataNasc))
+		} else if (!marca.equals(other.marca))
 			return false;
 		if (nome == null) {
 			if (other.nome != null)
 				return false;
 		} else if (!nome.equals(other.nome))
+			return false;
+		if (tipo == null) {
+			if (other.tipo != null)
+				return false;
+		} else if (!tipo.equals(other.tipo))
 			return false;
 		return true;
 	}
