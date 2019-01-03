@@ -61,8 +61,8 @@ public class ClienteService {
 		return clienteDTO;
 	}
 	
-	public void delete(ClienteDTO clienteSalvo) {
-		cliRepository.deleteById(clienteSalvo.getId());
+	public void delete(Integer id) {
+		cliRepository.deleteById(id);
 	}
 
 	public void edit(ClienteDTO clienteDTO) {
@@ -74,4 +74,5 @@ public class ClienteService {
 		Cliente cliente = new Cliente(id, nome, email, cpf);
 		cliRepository.saveAndFlush(cliente);
 	}
+
 }

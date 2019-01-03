@@ -45,7 +45,7 @@ public class ClienteServiceTest {
 //		Cliente clienteSalvo = cliService.findByID(cliente);
 //		cliService.delete(clienteSalvo);
 // Não pode colocar o findById armazenado em uma variavel "ClienteSalvo" e deletar o teste falha
-		cliService.delete(clienteDTO);
+		cliService.delete(clienteDTO.getId());
 		cliService.findByID(clienteDTO.getId());
 	}
 	@Test
