@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -43,8 +44,16 @@ public class ClienteController {
 	}
 	
 	@DeleteMapping(value="/cliente/{id}")
-	public ResponseEntity<?> deletarCliente(@PathVariable("id") ClienteDTO clienteDTO) {
-		this.cliService.delete(clienteDTO.getId());
+	public ResponseEntity<?> deletarCliente(@PathVariable("id") Integer id) {
+		this.cliService.delete(id);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+	
+	@PutMapping(value="/cliente/{id}")
+	public ResponseEntity<?> edit(@RequestBody ClienteDTO clienteDTO) {
+		this.cliService.edit(clienteDTO);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 }
+
+
