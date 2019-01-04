@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import br.com.loja.lojamusica.DTO.FuncionariosDTO;
 import br.com.loja.lojamusica.domain.DominioInvalidoException;
 import br.com.loja.lojamusica.domain.Funcionarios;
 
@@ -21,36 +22,51 @@ public class FuncionariosServiceTest {
 
 	@Test
 	public void deveSalvarFuncionarios() {
+		FuncionariosDTO funDTO = new FuncionariosDTO();
+		funDTO.setNome("Abreu");
 		LocalDate dataNascimento = LocalDate.of(1994, 7, 12);
-		Funcionarios funcionarios = new Funcionarios("Abreu", dataNascimento);
-		funService.save(funcionarios);
+		funDTO.setDataNasc(dataNascimento);
 		
-		Funcionarios funcionarioSalvo = funService.findById(funcionarios.getId());
+		funService.save(funDTO);
 		
-		Assert.assertEquals(funcionarios, funcionarioSalvo);
+		FuncionariosDTO funcionarioSalvo = funService.findById(funDTO.getId());
+		
+		Assert.assertEquals(funDTO.getNome(), funcionarioSalvo.getNome());
+		Assert.assertEquals(funDTO.getDataNasc(), funcionarioSalvo.getDataNasc());
+		
 		
 	}
 	@Test(expected=DominioInvalidoException.class)
 	public void deveExcluirFuncionarios() {
 		LocalDate dataNascimento = LocalDate.of(1994, 7, 12);
-		Funcionarios funcionarios = new Funcionarios("Abreu", dataNascimento);
-		funService.save(funcionarios);
-		funService.delete(funcionarios);
-		funService.findById(funcionarios.getId());
+		FuncionariosDTO funDTO = new FuncionariosDTO();
+		funDTO.setNome("Abreu");
+		funDTO.setDataNasc(dataNascimento);
+		funService.save(funDTO);
+		funService.delete(funDTO.getId());
+		funService.findById(funDTO.getId());
 	}
 	@Test
 	public void deveEditarFuncionarios() {
+		//1:salvando...
 		LocalDate dataNascimento = LocalDate.of(1994, 7, 12);
-		Funcionarios funcionarios = new Funcionarios("Abreu", dataNascimento);
-		funService.save(funcionarios);
+		FuncionariosDTO funDTO = new FuncionariosDTO();
+		funDTO.setNome("Abreu");
+		funDTO.setDataNasc(dataNascimento);
+		funService.save(funDTO);
+		//2:consultando...
+		FuncionariosDTO funSalvo = funService.findById(funDTO.getId());
+		//3:editando...
+		funSalvo.setNome("Julinho");
+		funSalvo.setDataNasc( LocalDate.of(1999, 5, 1));
+		//4:mandando editar...
+		funService.jedit(funSalvo);
+		//5:consulta para verificar a edicao
+		FuncionariosDTO funEditado = funService.findById(funSalvo.getId());
 		
-		Funcionarios funSalvo = funService.findById(funcionarios.getId());
 		
-		LocalDate newDataNascimento = LocalDate.of(1999, 1, 10);
-		Funcionarios funEditado = new Funcionarios(funcionarios.getId(), "Cristóvam", newDataNascimento);
-		funService.jedit(funEditado);
+		Assert.assertEquals("Julinho", funEditado.getNome());
+		Assert.assertEquals(LocalDate.of(1999, 5, 1), funEditado.getDataNasc());
 		
-		Assert.assertEquals("Cristóvam", funEditado.getNome());
-		Assert.assertEquals(newDataNascimento, funEditado.getDataNasc());
 	}
 }

@@ -1,11 +1,15 @@
 package br.com.loja.lojamusica.service;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.loja.lojamusica.DTO.FuncionariosDTO;
 import br.com.loja.lojamusica.domain.DominioInvalidoException;
 import br.com.loja.lojamusica.domain.Funcionarios;
 import br.com.loja.lojamusica.repository.FuncionariosRepository;
@@ -21,23 +25,55 @@ public class FuncionariosService {
 
 	}
 
-	public void save(Funcionarios funcionarios) {
+	public void save(FuncionariosDTO funcionariosDTO) {
+		String nome = funcionariosDTO.getNome();
+		
+		LocalDate dataNasc = funcionariosDTO.getDataNasc();
+		
+		
+		Funcionarios funcionarios =new Funcionarios(nome, dataNasc);
 		funRepository.saveAndFlush(funcionarios);
+		funcionariosDTO.setId(funcionarios.getId());
 	}
 
-	public Funcionarios findById(Integer id) {
+	public FuncionariosDTO findById(Integer id) {
 		Optional<Funcionarios> funcionarioSalvo = funRepository.findById(id);
 		if(funcionarioSalvo.isPresent()) {
-			return funcionarioSalvo.get();
+			return traduzindoFuncionarios(funcionarioSalvo.get());
 		}
 		throw new DominioInvalidoException("Funcionário não encontrado... Pesquisa dnv") ;
 	}
 
-	public void delete(Funcionarios funcionarios) {
-		funRepository.delete(funcionarios);
+	private FuncionariosDTO traduzindoFuncionarios(Funcionarios funcionarios)  {
+		FuncionariosDTO funDTO = new FuncionariosDTO();
+		funDTO.setId(funcionarios.getId());
+		funDTO.setDataNasc(funcionarios.getDataNasc());
+		funDTO.setNome(funcionarios.getNome());
+		return funDTO;
+	}
+	
+	
+	public void delete(Integer id) {
+		funRepository.deleteById(id);
 	}
 
-	public void jedit(Funcionarios funcionarios) {
+	public void jedit(FuncionariosDTO funcionariosDTO) {
+		Integer id = funcionariosDTO.getId();
+		String nome = funcionariosDTO.getNome();
+		LocalDate dataNasc = funcionariosDTO.getDataNasc();
+		Funcionarios funcionarios = new Funcionarios(id, nome, dataNasc);
 		funRepository.saveAndFlush(funcionarios);
+	}
+
+	public List<FuncionariosDTO> findAll() {
+		List<FuncionariosDTO> funcionariosRetornando = new ArrayList<FuncionariosDTO>();
+		List<Funcionarios> funcionarios = funRepository.findAll();
+		
+		for (Funcionarios funcionario: funcionarios) {
+			FuncionariosDTO funDTO =  traduzindoFuncionarios(funcionario);
+			funcionariosRetornando.add(funDTO);
+			
+		}
+		return funcionariosRetornando;
 	}
 }
