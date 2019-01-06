@@ -8,9 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.loja.lojamusica.DTO.ClienteDTO;
+import br.com.loja.lojamusica.Repository.ClienteRepository;
 import br.com.loja.lojamusica.domain.Cliente;
 import br.com.loja.lojamusica.domain.DominioInvalidoException;
-import br.com.loja.lojamusica.repository.ClienteRepository;
 
 @Service
 public class ClienteService {

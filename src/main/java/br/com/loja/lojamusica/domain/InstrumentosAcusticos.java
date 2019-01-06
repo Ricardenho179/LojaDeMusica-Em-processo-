@@ -36,7 +36,7 @@ public class InstrumentosAcusticos extends BaseDomain {
 
 	}
 
-	public InstrumentosAcusticos(Integer id, String tipo, String nome, String marca, double valor) {
+	public InstrumentosAcusticos(Integer id, String tipo, String nome, String marca, Double valor) {
 		this.id = id;
 		this.tipo = tipo;
 		this.nome = nome;
@@ -46,7 +46,7 @@ public class InstrumentosAcusticos extends BaseDomain {
 	}
 
 	// Construtor de teste
-	public InstrumentosAcusticos(String tipo, String nome, String marca, double valor) {
+	public InstrumentosAcusticos(String tipo, String nome, String marca, Double valor) {
 		this.tipo = tipo;
 		this.nome = nome;
 		this.marca = marca;

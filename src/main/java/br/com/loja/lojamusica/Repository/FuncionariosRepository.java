@@ -1,4 +1,4 @@
-package br.com.loja.lojamusica.repository;
+package br.com.loja.lojamusica.Repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

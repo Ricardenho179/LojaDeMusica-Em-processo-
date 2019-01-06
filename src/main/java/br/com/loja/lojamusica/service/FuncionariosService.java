@@ -10,9 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.loja.lojamusica.DTO.FuncionariosDTO;
+import br.com.loja.lojamusica.Repository.FuncionariosRepository;
 import br.com.loja.lojamusica.domain.DominioInvalidoException;
 import br.com.loja.lojamusica.domain.Funcionarios;
-import br.com.loja.lojamusica.repository.FuncionariosRepository;
 
 @Service
 public class FuncionariosService {
