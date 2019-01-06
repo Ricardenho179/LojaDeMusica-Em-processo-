@@ -1,5 +1,6 @@
 package br.com.loja.lojamusica.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -66,9 +67,21 @@ public class InstrumentosAcusticosService {
 		String nome = instruAcusDTO.getNome();
 		double valor = instruAcusDTO.getValor();
 		InstrumentosAcusticos instruAcus = new InstrumentosAcusticos(id, tipo, nome, marca, valor);
+		//Não esquecer de salvar se não ele nao atualiza as informações kkk
+		instruAcusRepository.saveAndFlush(instruAcus);
 	}
-	//método para 
-	public void findAll() {
+	//método para q o controller possa pegar uma lista deste objeto e mostrar
+	public List<InstrumentosAcusticosDTO> findAll() {
+		List<InstrumentosAcusticosDTO> instrumentosAcusticosRetornando = new ArrayList<InstrumentosAcusticosDTO>();
+		//perguntar sobre oque essa linha faz! <------REMOVER
+		//resposta:
+		List<InstrumentosAcusticos> instruAcusticos = instruAcusRepository.findAll();
 		
+		for (InstrumentosAcusticos instruAcus: instruAcusticos) {
+			//Tradução dos dados DTO para Dominio
+			InstrumentosAcusticosDTO instruAcusDTO = traduzindoInstrumentosAcusticos(instruAcus);
+			instrumentosAcusticosRetornando.add(instruAcusDTO);
+		}
+		return instrumentosAcusticosRetornando;
 	}
 }

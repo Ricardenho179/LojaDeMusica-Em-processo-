@@ -59,19 +59,19 @@ public class InstrumentosAcusticos extends BaseDomain {
 	}
 
 	public String getTipo() {
-		return tipo;
+		return this.tipo;
 	}
 
 	public String getNome() {
-		return nome;
+		return this.nome;
 	}
 
 	public String getMarca() {
-		return marca;
+		return this.marca;
 	}
 
 	public Double getValor() {
-		return valor;
+		return this.valor;
 	}
 
 	@Override

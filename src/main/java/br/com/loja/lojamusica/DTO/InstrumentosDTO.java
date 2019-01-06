@@ -3,7 +3,7 @@ package br.com.loja.lojamusica.DTO;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-public class InstrumentosAcusticosDTO {
+public class InstrumentosDTO {
 	
 	private Integer id;
 	
@@ -16,7 +16,13 @@ public class InstrumentosAcusticosDTO {
 	@NotNull
 	@NotEmpty
 	private String marca;
-
+	@NotNull
+	@NotEmpty
+	private String amplificador;
+	@NotNull
+	@NotEmpty
+	private String caixaSom;
+	
 	@NotNull
 	private double valor;
 
@@ -29,7 +35,7 @@ public class InstrumentosAcusticosDTO {
 	}
 
 	public String getTipo() {
-		return this.tipo;
+		return tipo;
 	}
 
 	public void setTipo(String tipo) {
@@ -37,7 +43,7 @@ public class InstrumentosAcusticosDTO {
 	}
 
 	public String getNome() {
-		return this.nome;
+		return nome;
 	}
 
 	public void setNome(String nome) {
@@ -45,19 +51,36 @@ public class InstrumentosAcusticosDTO {
 	}
 
 	public String getMarca() {
-		return this.marca;
+		return marca;
 	}
 
 	public void setMarca(String marca) {
 		this.marca = marca;
 	}
 
-	public Double getValor() {
-		return this.valor;
+	public String getAmplificador() {
+		return amplificador;
 	}
 
-	public void setValor(Double valor) {
+	public void setAmplificador(String amplificador) {
+		this.amplificador = amplificador;
+	}
+
+	public String getCaixaSom() {
+		return caixaSom;
+	}
+
+	public void setCaixaSom(String caixaSom) {
+		this.caixaSom = caixaSom;
+	}
+
+	public double getValor() {
+		return valor;
+	}
+
+	public void setValor(double valor) {
 		this.valor = valor;
 	}
+	
 	
 }
