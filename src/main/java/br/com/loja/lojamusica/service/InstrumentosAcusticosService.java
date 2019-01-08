@@ -3,15 +3,11 @@ package br.com.loja.lojamusica.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import br.com.loja.lojamusica.DTO.FuncionariosDTO;
 import br.com.loja.lojamusica.DTO.InstrumentosAcusticosDTO;
 import br.com.loja.lojamusica.Repository.InstrumentosAcusticosRepository;
 import br.com.loja.lojamusica.domain.DominioInvalidoException;
-import br.com.loja.lojamusica.domain.Funcionarios;
 import br.com.loja.lojamusica.domain.InstrumentosAcusticos;
 
 @Service
@@ -24,7 +20,7 @@ public class InstrumentosAcusticosService {
 		this.instruAcusRepository = instruAcusRepository;
 		
 	}
-	//Queria salvar uma lista de instrumentos
+
 	public void save(InstrumentosAcusticosDTO instruAcusDTO) {
 		String tipo = instruAcusDTO.getTipo();
 		String marca = instruAcusDTO.getMarca();
@@ -60,14 +56,14 @@ public class InstrumentosAcusticosService {
 		instruAcusRepository.deleteById(id);
 	}
 	
-	public void jedit(InstrumentosAcusticosDTO instruAcusDTO) {
+	public void edit(InstrumentosAcusticosDTO instruAcusDTO) {
 		Integer id = instruAcusDTO.getId();
 		String tipo = instruAcusDTO.getTipo();
 		String marca = instruAcusDTO.getMarca();
 		String nome = instruAcusDTO.getNome();
 		double valor = instruAcusDTO.getValor();
 		InstrumentosAcusticos instruAcus = new InstrumentosAcusticos(id, tipo, nome, marca, valor);
-		//Não esquecer de salvar se não ele nao atualiza as informações kkk
+		//Não esquecer de salvar se não ele nao atualiza as informações
 		instruAcusRepository.saveAndFlush(instruAcus);
 	}
 	//método para q o controller possa pegar uma lista deste objeto e mostrar

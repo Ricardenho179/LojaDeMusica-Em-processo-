@@ -56,7 +56,7 @@ public class InstrumentosAcusticosController {
 	
 	@PutMapping(value="/instrumentosAcusticos/{id}")
 	public ResponseEntity<?> juedit(@RequestBody InstrumentosAcusticosDTO instruAcusDTO) {
-		instruAcusService.jedit(instruAcusDTO);
+		instruAcusService.edit(instruAcusDTO);
 		return new ResponseEntity<> (HttpStatus.OK);
 	}
 }

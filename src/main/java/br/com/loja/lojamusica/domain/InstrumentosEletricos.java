@@ -5,14 +5,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "instrumentos")
-public class Instrumentos extends Eletrico {
+@Table(name = "instrumentos_eletricos")
+
+public class InstrumentosEletricos extends BaseDomain {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,9 +23,11 @@ public class Instrumentos extends Eletrico {
 	@NotNull
 	@NotEmpty
 	private String tipo;
+	
 	@NotNull
 	@NotEmpty
 	private String nome;
+	
 	@NotNull
 	@NotEmpty
 	private String marca;
@@ -32,12 +35,20 @@ public class Instrumentos extends Eletrico {
 	@NotNull
 	private double valor;
 
-	@SuppressWarnings("unused")
-	public Instrumentos() {
+	@NotNull
+	@NotEmpty
+	protected String amplificador;
 
+	@NotNull
+	@NotEmpty
+	@Column(name="caixa_som")
+	protected String caixaSom;
+	
+	@SuppressWarnings("unused")
+	private InstrumentosEletricos() {
 	}
 
-	public Instrumentos(Integer id, String tipo, String nome, String marca, String amplificador, String caixaSom,
+	public InstrumentosEletricos(Integer id, String tipo, String nome, String marca, String amplificador, String caixaSom,
 			double valor) {
 		this.id = id;
 		this.tipo = tipo;
@@ -50,8 +61,7 @@ public class Instrumentos extends Eletrico {
 
 	}
 
-	// Construtor de teste
-	public Instrumentos(String tipo, String nome, String marca, String amplificador, String caixaSom, double valor) {
+	public InstrumentosEletricos(String tipo, String nome, String marca, String amplificador, String caixaSom, double valor) {
 		this.tipo = tipo;
 		this.nome = nome;
 		this.marca = marca;
@@ -82,12 +92,10 @@ public class Instrumentos extends Eletrico {
 	}
 
 	public String getAmplificador() {
-		// TODO Auto-generated method stub
 		return amplificador;
 	}
 	
 	public String getCaixaSom() {
-		// TODO Auto-generated method stub
 		return caixaSom;
 	}
 
@@ -109,7 +117,7 @@ public class Instrumentos extends Eletrico {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Instrumentos other = (Instrumentos) obj;
+		InstrumentosEletricos other = (InstrumentosEletricos) obj;
 		if (marca == null) {
 			if (other.marca != null)
 				return false;
@@ -127,7 +135,5 @@ public class Instrumentos extends Eletrico {
 			return false;
 		return true;
 	}
-
-	
 
 }

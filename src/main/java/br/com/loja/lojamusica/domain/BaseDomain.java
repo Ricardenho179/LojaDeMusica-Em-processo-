@@ -16,7 +16,6 @@ import br.com.loja.lojamusica.domain.BaseDomain;
 import br.com.loja.lojamusica.domain.DominioInvalidoException;
 
 @MappedSuperclass
-
 abstract class BaseDomain {
 	
 	public void validarDominio() {

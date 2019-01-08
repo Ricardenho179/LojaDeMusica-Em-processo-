@@ -32,7 +32,7 @@ public class InstrumentosAcusticos extends BaseDomain {
 	private double valor;
 
 	@SuppressWarnings("unused")
-	public InstrumentosAcusticos() {
+	private InstrumentosAcusticos() {
 
 	}
 

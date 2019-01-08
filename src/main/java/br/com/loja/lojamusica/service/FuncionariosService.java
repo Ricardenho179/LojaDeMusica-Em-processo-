@@ -57,7 +57,7 @@ public class FuncionariosService {
 		funRepository.deleteById(id);
 	}
 
-	public void jedit(FuncionariosDTO funcionariosDTO) {
+	public void edit(FuncionariosDTO funcionariosDTO) {
 		Integer id = funcionariosDTO.getId();
 		String nome = funcionariosDTO.getNome();
 		LocalDate dataNasc = funcionariosDTO.getDataNasc();

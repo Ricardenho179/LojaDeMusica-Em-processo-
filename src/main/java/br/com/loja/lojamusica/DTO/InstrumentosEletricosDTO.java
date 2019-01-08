@@ -3,7 +3,7 @@ package br.com.loja.lojamusica.DTO;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-public class InstrumentosDTO {
+public class InstrumentosEletricosDTO {
 	
 	private Integer id;
 	
@@ -74,7 +74,7 @@ public class InstrumentosDTO {
 		this.caixaSom = caixaSom;
 	}
 
-	public double getValor() {
+	public Double getValor() {
 		return valor;
 	}
 

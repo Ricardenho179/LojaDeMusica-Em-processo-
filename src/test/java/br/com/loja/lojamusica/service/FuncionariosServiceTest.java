@@ -60,7 +60,7 @@ public class FuncionariosServiceTest {
 		funSalvo.setNome("Julinho");
 		funSalvo.setDataNasc( LocalDate.of(1999, 5, 1));
 		//4:mandando editar...
-		funService.jedit(funSalvo);
+		funService.edit(funSalvo);
 		//5:consulta para verificar a edicao
 		FuncionariosDTO funEditado = funService.findById(funSalvo.getId());
 		

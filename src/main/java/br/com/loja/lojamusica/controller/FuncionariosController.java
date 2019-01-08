@@ -53,7 +53,7 @@ public class FuncionariosController {
 	
 	@PutMapping(value="/funcionarios/{id}")
 	public ResponseEntity<?> jedit(@RequestBody FuncionariosDTO funDTO) {
-		funService.jedit(funDTO);
+		funService.edit(funDTO);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	

@@ -64,7 +64,7 @@ public class InstrumentosAcusticosServiceTest {
 		instruAcusSalvo.setTipo("CordaBolada");
 		instruAcusSalvo.setValor(new Double(38000000.00));
 		//4:mandar Editar
-		instruAcusService.jedit(instruAcusSalvo);
+		instruAcusService.edit(instruAcusSalvo);
 		
 		//5:Consultar para verificar
 		InstrumentosAcusticosDTO instruAcusEditado = instruAcusService.findById(instruAcusSalvo.getId());
