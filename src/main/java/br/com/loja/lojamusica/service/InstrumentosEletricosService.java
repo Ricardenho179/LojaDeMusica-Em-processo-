@@ -32,7 +32,7 @@ public class InstrumentosEletricosService {
 		
 		
 		InstrumentosEletricos instru = new InstrumentosEletricos(tipo, nome, marca, amplificador, caixaSom, valor);
-		instruRepository.saveAndFlush(null);
+		instruRepository.saveAndFlush(instru);
 		instruDTO.setId(instru.getId());
 	}
 	
@@ -65,11 +65,13 @@ public class InstrumentosEletricosService {
 	//método auxiliar para percorrer
 	private InstrumentosEletricosDTO traduzindoInstrumentosEletricos (InstrumentosEletricos instru) {
 		InstrumentosEletricosDTO instruDTO = new InstrumentosEletricosDTO();
+		instruDTO.setId(instru.getId());
 		instruDTO.setTipo(instru.getTipo());
 		instruDTO.setMarca(instru.getMarca());
 		instruDTO.setNome(instru.getNome());
 		instruDTO.setAmplificador(instru.getAmplificador());
 		instruDTO.setCaixaSom(instru.getCaixaSom());
+		instruDTO.setValor(instru.getValor());
 		
 		return instruDTO;
 	}

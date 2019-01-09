@@ -39,16 +39,55 @@ public class InstrumentosEletricosServiceTest {
 		Assert.assertEquals(new Double(6000.00), instrumentosSalvos.getValor());
 		
 	}
-//	@Test(expected=DominioInvalidoException.class)
-//	public void deveDeletarInstrumentosEletricos() {
-//		
-//	}
-//	@Test
-//	public void deveEditarInstrumentosEletricos() {
-//		//1:
-//		//2:
-//		//3:
-//		//4:
-//		//5:
-//	}
+	@Test(expected=DominioInvalidoException.class)
+	public void deveDeletarInstrumentosEletricos() {
+		InstrumentosEletricosDTO instruDTO = new InstrumentosEletricosDTO();
+		instruDTO.setTipo("Corda");
+		instruDTO.setMarca("Gibson");
+		instruDTO.setNome("Guitarra");
+		instruDTO.setAmplificador("Valvetronix");
+		instruDTO.setCaixaSom("Datrel");
+		instruDTO.setValor(new Double(6000.00));
+		
+		instruService.salvar(instruDTO);
+		
+		instruService.deletar(instruDTO.getId());
+		
+		instruService.findById(instruDTO.getId());
+		
+	}
+	@Test
+	public void deveEditarInstrumentosEletricos() {
+		//1:Salvar
+		InstrumentosEletricosDTO instruDTO = new InstrumentosEletricosDTO();
+		instruDTO.setTipo("Corda");
+		instruDTO.setMarca("Gibson");
+		instruDTO.setNome("Guitarra");
+		instruDTO.setAmplificador("Valvetronix");
+		instruDTO.setCaixaSom("Datrel");
+		instruDTO.setValor(new Double(6000.00));
+		
+		instruService.salvar(instruDTO);
+		//2:Pesquisar
+		InstrumentosEletricosDTO instrumentoSalvo = instruService.findById(instruDTO.getId());
+		//3:Mandar editar
+		instrumentoSalvo.setTipo("Percussao");
+		instrumentoSalvo.setMarca("ALAHUAKIBA");
+		instrumentoSalvo.setNome("BateriaEletrica");
+		instrumentoSalvo.setAmplificador("Ojsghdhg");
+		instrumentoSalvo.setCaixaSom("idugyweuf23");
+		instrumentoSalvo.setValor(new Double(1000.00));
+		//4:Editar
+		instruService.edit(instrumentoSalvo);
+		//5:consultar novamente
+		InstrumentosEletricosDTO intrumentoEditado = instruService.findById(instrumentoSalvo.getId());
+		
+		
+		Assert.assertEquals("Percussao", instrumentoSalvo.getTipo());
+		Assert.assertEquals("ALAHUAKIBA", instrumentoSalvo.getMarca());
+		Assert.assertEquals("BateriaEletrica", instrumentoSalvo.getNome());
+		Assert.assertEquals("Ojsghdhg", instrumentoSalvo.getAmplificador());
+		Assert.assertEquals("idugyweuf23", instrumentoSalvo.getCaixaSom());
+		Assert.assertEquals(new Double(1000.00), instrumentoSalvo.getValor());
+	}
 }
